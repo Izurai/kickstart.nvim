@@ -13,27 +13,12 @@ endglobal
 
 
 snippet template "Basic template" b
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \documentclass[a4paper]{article}
+\input{header}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{textcomp}
-\usepackage[french]{babel}
-\usepackage{amsmath, amssymb, amsthm}
-
-
-% figure support
-\usepackage{import}
-\usepackage{xifthen}
-\pdfminorversion=7
-\usepackage{pdfpages}
-\usepackage{transparent}
-\newcommand{\incfig}[1]{%
-	\def\svgwidth{\columnwidth}
-	\import{./figures/}{#1.pdf_tex}
-}
-
-\pdfsuppresswarningpagegroup=1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Begin document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 	$0
@@ -73,13 +58,13 @@ endsnippet
 
 snippet enum "Enumerate" bA
 \begin{enumerate}
-	\item $0
+\item $0
 \end{enumerate}
 endsnippet
 
 snippet item "Itemize" bA
 \begin{itemize}
-	\item $0
+\item $0
 \end{itemize}
 endsnippet
 
@@ -123,8 +108,8 @@ endsnippet
 
 snippet ali "Align" bA
 \begin{align*}
-	${1:${VISUAL}}
-.\end{align*}
+${1:${VISUAL}}
+\end{align*}
 endsnippet
 
 
@@ -185,20 +170,20 @@ snip.rv = eval('latex(' + match.group(1).replace('\\', '').replace('^', '**').re
 `
 endsnippet
 
-priority 1000
-snippet math "mathematicablock" w
-math $1 math$0
-endsnippet
+#priority 1000
+#snippet math "mathematicablock" w
+#math $1 math$0
+#endsnippet
 
-priority 10000
-snippet 'math(.*)math' "math" wr
-`!p
-import subprocess
-code = match.group(1)
-code = 'ToString[' + code + ', TeXForm]'
-snip.rv = subprocess.check_output(['wolframscript', '-code', code])
-`
-endsnippet
+#priority 10000
+#snippet 'math(.*)math' "math" wr
+#`!p
+#import subprocess
+#code = match.group(1)
+#code = 'ToString[' + code + ', TeXForm]'
+#snip.rv = subprocess.check_output(['wolframscript', '-code', code])
+#`
+#endsnippet
 
 snippet == "equals" iA
 &= $1 \\\\
@@ -226,10 +211,10 @@ snippet bmat "bmat" iA
 \begin{bmatrix} $1 \end{bmatrix} $0
 endsnippet
 
-context "math()"
-snippet () "left( right)" iA
-\left( ${1:${VISUAL}} \right) $0
-endsnippet
+# context "math()"
+# snippet () "left( right)" iA
+# \left( ${1:${VISUAL}} \right) $0
+# endsnippet
 
 snippet lr "left( right)" i
 \left( ${1:${VISUAL}} \right) $0
@@ -291,6 +276,11 @@ endsnippet
 context "math()"
 snippet sq "\sqrt{}" iA
 \sqrt{${1:${VISUAL}}} $0
+endsnippet
+
+context "math()"
+snippet vec "\vec{}" iA
+\vec{${1:${VISUAL}}} $0
 endsnippet
 
 context "math()"
